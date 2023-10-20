@@ -1,0 +1,10 @@
+--CREATE TABLE IF NOT EXISTS public.tb_code_phone_countries (
+--    id bigserial not null,
+--    id_country bigint not null,
+--    code_phone varchar(3) not null,
+--    id_user integer not null,
+--    create_at timestamp(6) not null,
+--    delete_at timestamp default null,
+--    update_at timestamp(6) not null,
+--    primary key (id)
+--);

@@ -1,0 +1,11 @@
+--create table IF NOT EXISTS public.tb_departaments (
+--    id bigserial not null,
+--    id_country bigint not null,
+--    name_detail varchar(50) not null,
+--    condition smallint not null check (condition between 0 and 2),
+--    id_user integer not null,
+--    create_at timestamp(6) not null,
+--    update_at timestamp(6) not null,
+--    delete_at TIMESTAMP DEFAULT NULL,
+--    primary key (id)
+--);
