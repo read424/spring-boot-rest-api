@@ -17,13 +17,13 @@ If you're using Maven, then edit your project's "pom.xml" and add this to the `<
 ```xml
 <dependency>
   <groupId>org.postgresql</groupId>
-	<artifactId>postgresql</artifactId>
-	<scope>runtime</scope>
+  <artifactId>postgresql</artifactId>
+  <scope>runtime</scope>
 </dependency>
 <dependency>
   <groupId>org.projectlombok</groupId>
-	<artifactId>lombok</artifactId>
-	<optional>true</optional>
+  <artifactId>lombok</artifactId>
+  <optional>true</optional>
 </dependency>
 ```
 
