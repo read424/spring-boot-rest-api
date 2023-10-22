@@ -1,10 +1,13 @@
 package com.walrex.msvc.countries.msvcountries.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import com.walrex.msvc.countries.msvcountries.mappers.CountryMapper;
 import com.walrex.msvc.countries.msvcountries.models.dto.CountryDTO;
+import com.walrex.msvc.countries.msvcountries.models.entity.CodePhone;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +28,15 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     @Transactional
-    public Country saveOneCountry(CountryDTO countryDTO){
-        Country country = countryMapper.countryDtoToCountry(countryDTO);
-        LOG.info("INFO COUNTRY = {}", country);
+    public Country saveOneCountry(Country country){
+        List<CodePhone> codephones = new ArrayList<>();
+        for (CodePhone phoneItem : country.getPhonecodes()) {
+            CodePhone phone = new CodePhone();
+            phone.setCode_phone(phoneItem.getCode_phone());
+            phone.setCountry(country);
+            codephones.add(phone);
+        }
+        country.setPhonecodes(codephones);
         return countryRepository.save(country);
     }
     @Autowired

@@ -1,5 +1,6 @@
 package com.walrex.msvc.countries.msvcountries.controller;
 
+import com.walrex.msvc.countries.msvcountries.models.entity.Country;
 import com.walrex.msvc.countries.msvcountries.service.CountryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,12 +21,12 @@ public class CountryController {
     private CountryService service;
 
     @PostMapping("/create")
-    public ResponseEntity<?> agregarCountry(@Valid @RequestBody CountryDTO countryDTO) throws Exception{
-        if(countryDTO==null)
+    public ResponseEntity<?> agregarCountry(@RequestBody Country country) throws Exception{
+        if(country==null)
             return ResponseEntity.badRequest().body("Los datos del pais suministrado no es valido");
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(service.saveOneCountry(countryDTO));
+                .body(service.saveOneCountry(country));
     }
 
     //@PutMapping("/{id}")

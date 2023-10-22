@@ -3,15 +3,15 @@ package com.walrex.msvc.countries.msvcountries.models.entity;
 import java.util.List;
 import java.time.LocalDateTime;
 
-//import java.io.Serializable;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.walrex.msvc.countries.msvcountries.models.enumerate.StatusType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-/*
+@Data
+@Entity
 @Table(name="tb_countries", schema = "public",
     indexes = {
         @Index(name="idx_code2", columnList = "alpha_code_2", unique = true),
@@ -23,40 +23,25 @@ import org.hibernate.annotations.UpdateTimestamp;
         @UniqueConstraint(name="name_countri_uk", columnNames = "name_detail"),
     }
 )
-*/
-@Getter
-@Setter
-@Entity
-@Table(name = "tb_countries")
 public class Country {
-    @Id
-    private Long id;
-    private String name;
-    private String desc;
-    private int quantity;
-    private long price;
-    private String itemid;
-
-    private List<CodePhone> codesphone;
-    /*
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="alpha_code_2", unique = true, nullable = false, length = 2)
+    @Column(name="alpha_code_2", nullable = false, length = 2)
     private String code2;
 
-    @Column(name="alpha_code_3", unique = true, nullable = false, length = 3)
+    @Column(name="alpha_code_3", nullable = false, length = 3)
     private String code3;
 
-    @Column(name="name_detail", unique = true, nullable = false, length = 50)
+    @Column(name="name_detail", nullable = false, length = 50)
     private String name_country;
 
     @Column(name="url_flag", nullable = true)
     private String path_flag;
 
-    @Column(name= "status", nullable = false, columnDefinition = "SMALLINT DEFAULT 1")
-    @Enumerated(EnumType.ORDINAL)
+    @Column(name= "status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private StatusType condition = StatusType.ENABLED;
 
     @Column(nullable = true)
@@ -65,12 +50,8 @@ public class Country {
     @Column(name="gmt_offset", nullable = true)
     private String gmt;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @ToString.Exclude
-    private List<CodePhone> phonecodes;
-
-    @Column(nullable = false, columnDefinition = "LONG DEFAULT 1")
-    private Integer id_user;
+    @Column(nullable = false, columnDefinition = "INT DEFAULT 1")
+    private Integer id_user=1;
 
     @CreationTimestamp
     @Column(nullable = false)
@@ -82,5 +63,9 @@ public class Country {
 
     @Column(nullable = true, columnDefinition = "timestamp default null")
     private LocalDateTime delete_at;
-     */
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "country", cascade = CascadeType.ALL)
+    private List<CodePhone> phonecodes;
+
 }
